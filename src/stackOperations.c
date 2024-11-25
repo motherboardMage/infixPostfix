@@ -7,6 +7,7 @@ extern number* topNum;
 
 void push(token value, char type)
 {
+    // Handles type symbol
     if(type == 'S')
     {
         symbol* tempSym = (symbol*)calloc(1, sizeof(symbol));
@@ -23,6 +24,8 @@ void push(token value, char type)
             topSym = tempSym;
         }
     }
+
+    // Handles type number
     else if(type == 'N')
     {
         number* tempNum = (number*)calloc(1, sizeof(number));

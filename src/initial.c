@@ -26,14 +26,16 @@ void mainMenu()
                "3. Exit the program\n-> ");
 
         scanf("%d", &choice);
-        while (getchar() != '\n' && getchar() != EOF);
+        while (getchar() != '\n');
 
+        // looks shit but I like switches
         switch (choice)
         {
         case 1:
             printf("Enter expression\n-> ");
             fgets(expression, sizeof(expression), stdin);
             evaluatePostfix(expression);
+            
             if(topNum == NULL)
             {
                 printf("Error! Stack empty or evaluation failed\n");
@@ -49,6 +51,7 @@ void mainMenu()
             break;
 
         case 3:
+            // TODO
             return;
 
         default:
