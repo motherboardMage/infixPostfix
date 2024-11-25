@@ -1,0 +1,1 @@
+Just do a "make all" in the root directory
