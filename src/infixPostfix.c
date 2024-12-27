@@ -1,10 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "../include/infixPostfix.h"
 
 token value;
 extern symbol* topSym;
 extern number* topNum;
-char numStr[11];
 
 void calculate(char operator)
 {
@@ -39,12 +39,13 @@ void calculate(char operator)
 void evaluatePostfix(char expression[])
 {
     while (getchar() != '\n');
-    char *current = expression;
+    char* current = expression;
+    char* numStr = (char*)calloc(11, sizeof(char));
 
     // Scan the expression string until EOL is reached
     while(*current != '\0')
     {
-        if(*current == OPERATORS)
+        if(isOperator(current))
         {
             /*
             It does not make sense to encounter an
@@ -65,9 +66,10 @@ void evaluatePostfix(char expression[])
             int iter = 0;
 
             // Start reading the number
-            while(*current != ' ' || *current != OPERATORS)
+            while(*current != ' ' || !isOperator(current))
                 {
                     numStr[iter] = *current;
+                    printf("Value read: %d\n", *current);
                     iter++;
                     current++;
                     /*
@@ -78,6 +80,7 @@ void evaluatePostfix(char expression[])
             numStr[iter] = '\0';
             iter = 0;
             sscanf(numStr, "%f", &value.num); // Convert the string into a float
+            printf("Number read: %f\n", value.num);
             push(value, 'N');
         }
         current++;
@@ -88,4 +91,35 @@ void infixToPostfix(char* expression)
 {
     // TODO
     return;
+}
+
+int isOperator(char* value)
+{
+    switch (*value)
+    {
+    case '+':
+        goto yes;
+        break;
+    case '-':
+        goto yes;
+        break;
+    case '*':
+        goto yes;
+        break;
+    case '/':
+        goto yes;
+        break;
+    case '^':
+        goto yes;
+        break;
+
+    default:
+        goto no;
+        break;
+    }
+
+yes:
+    return 1;
+no:
+    return 0;
 }
