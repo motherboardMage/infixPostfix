@@ -66,10 +66,9 @@ void evaluatePostfix(char expression[])
             int iter = 0;
 
             // Start reading the number
-            while(*current != ' ' || !isOperator(current))
+            while(*current != ' ' && !isOperator(current))
                 {
                     numStr[iter] = *current;
-                    printf("Value read: %d\n", *current);
                     iter++;
                     current++;
                     /*
@@ -79,12 +78,12 @@ void evaluatePostfix(char expression[])
                 }
             numStr[iter] = '\0';
             iter = 0;
-            sscanf(numStr, "%f", &value.num); // Convert the string into a float
-            printf("Number read: %f\n", value.num);
+            sscanf(numStr, "%g", &value.num); // Convert the string into a float
             push(value, 'N');
         }
         current++;
     }
+    free(numStr);
 }
 
 void infixToPostfix(char* expression)
