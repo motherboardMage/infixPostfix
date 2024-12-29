@@ -94,31 +94,29 @@ void infixToPostfix(char* expression)
 
 int isOperator(char* value)
 {
+    int flag = 0;
     switch (*value)
     {
     case '+':
-        goto yes;
+        flag = 1;
         break;
     case '-':
-        goto yes;
+        flag = 1;
         break;
     case '*':
-        goto yes;
+        flag = 1;
         break;
     case '/':
-        goto yes;
+        flag = 1;
         break;
     case '^':
-        goto yes;
+        flag = 1;
         break;
 
     default:
-        goto no;
         break;
     }
 
-yes:
-    return 1;
-no:
-    return 0;
+    if(flag == 1) return 1;
+    else return 0;
 }
